@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    <%= title %>
+  </title>
+</head>
+<body>
+	<% if(!auth){ %>
+		<p>您尚未登入，未能留言</p>
+	<% } %>
+	<h1>留言板</h1>
+	<% if(auth){ %>
+	<form action="/messageBoard" method="post">
+		<input type="text" name="content" placeholder="填寫留言訊息">
+		<input type="submit" valut="送出">
+		<%= errors %>
+	</form>
+	<% } %>
+	<a href="/login">登入</a>
+	<a href="/signup">註冊</a>
+	<% if(auth){ %>
+		<a href="/user">個人頁面</a>
+	<% } %>
+	<a href="/logout">登出</a>
+	<ul>
+		<!-- list { uid: { content:~, nick:~},uid: { content:~, nick:~}  } 所以 item is uid-->
+		<% for (item in list ){ %>
+			<li> 某人 <%= list[item].nickname %> 流言了 <%= list[item].content %></li>
+		<% } %>
+
+	 </ul>
+</body>
+</html>
